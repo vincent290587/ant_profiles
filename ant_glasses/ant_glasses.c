@@ -1,11 +1,8 @@
 
-#include <string.h>
 #include "nrf_assert.h"
 #include "app_error.h"
 #include "ant_interface.h"
-#include "app_util.h"
 #include "ant_glasses.h"
-#include "app_error.h"
 
 #define NRF_LOG_MODULE_NAME "ANT_GLASSES"
 #if ANT_GLASSES_LOG_ENABLED
@@ -24,6 +21,15 @@
 
 #define RTC_COUNTER_FREQ             1024u                                                                             /**< Desired RTC COUNTER frequency is 1024Hz (1/1024s period). */
 #define RTC_PRESCALER                (ROUNDED_DIV(APP_TIMER_CLOCK_FREQ, RTC_COUNTER_FREQ) - 1u)                        /**< Computed value of the RTC prescaler register. */
+
+
+typedef struct
+{
+    uint8_t led_mask;
+    uint8_t avance_lsb;
+    uint8_t avance_msb;
+    uint8_t reserved[4];
+} ant_glasses_data_layout_t;
 
 
 uint32_t ant_glasses_init(ant_glasses_profile_t * p_profile, ant_channel_config_t const * p_channel_config)
@@ -66,24 +72,22 @@ void ant_glasses_tx_evt_handle(ant_glasses_profile_t * p_profile, ant_evt_t * p_
     }
 }
 
-static void decode_glasses_rx_message(ant_glasses_profile_t * p_profile, uint8_t * p_message_payload, ant_glasses_trans *trans)
+static void decode_glasses_rx_message(ant_glasses_profile_t * p_profile, uint8_t * p_message_payload, ant_glasses_data_t *trans)
 {
-  float tmp;
-  
   const ant_glasses_data_layout_t *msg  = (ant_glasses_data_layout_t *)p_message_payload;
   
-  memcpy(&tmp, msg->avance, sizeof(float));
-  
   if (trans) {
-    trans->led_mask = msg->led_mask;
-    trans->avance = (float)msg->avance[0];
-    trans->avance += (float)msg->avance[1] / 100.;
+    trans->rled_on = msg->led_mask & 0b00000001;
+    trans->gled_on = msg->led_mask & 0b00000010;
+    trans->bled_on = msg->led_mask & 0b00000100;
+    trans->avance = (float)msg->avance_msb;
+    trans->avance += (float)msg->avance_lsb / 100.;
   }
   
   return;
 }
 
-void ant_glasses_rx_evt_handle(ant_glasses_profile_t * p_profile, ant_evt_t * p_ant_event, ant_glasses_trans *trans)
+void ant_glasses_rx_evt_handle(ant_glasses_profile_t * p_profile, ant_evt_t * p_ant_event, ant_glasses_data_t *trans)
 {
    ANT_MESSAGE * p_message = (ANT_MESSAGE *)p_ant_event->msg.evt_buffer;
   
