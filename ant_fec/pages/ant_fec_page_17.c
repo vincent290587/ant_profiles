@@ -15,7 +15,7 @@
 
 #include "ant_fec_page_17.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_17"
+#define NRF_LOG_MODULE_NAME ant_fec_p17
 #if ANT_FEC_PAGE_17_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_PAGE_17_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_PAGE_17_INFO_COLOR
@@ -23,6 +23,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_17_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 
 

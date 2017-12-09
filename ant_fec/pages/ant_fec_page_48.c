@@ -17,7 +17,7 @@
 #include "ant_fec_page_48.h"
 #include "ant_fec_utils.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_48"
+#define NRF_LOG_MODULE_NAME ant_fec_p48
 #if ANT_FEC_PAGE_48_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_INFO_COLOR
@@ -25,6 +25,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_TORQUE_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 
 /**@brief bicycle power page torque data layout structure. */

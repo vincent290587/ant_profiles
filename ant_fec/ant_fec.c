@@ -18,7 +18,7 @@
 #include "ant_interface.h"
 #include "ant_fec.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC"
+#define NRF_LOG_MODULE_NAME ant_fec
 #if ANT_FEC_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_INFO_COLOR
@@ -26,6 +26,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 #define FEC_CALIB_INT_TIMEOUT ((ANT_CLOCK_FREQUENCY * FEC_CALIBRATION_TIMOUT_S) / FEC_MSG_PERIOD) // calibration timeout in ant message period's unit
 
@@ -240,21 +241,22 @@ static void service_calib(ant_fec_profile_t * p_profile, uint8_t event)
 
 
 
-void ant_fec_disp_evt_handler(ant_fec_profile_t * p_profile, ant_evt_t * p_ant_event)
+void ant_fec_disp_evt_handler(ant_evt_t * p_ant_evt, void * p_context)
 {
-    if (p_ant_event->channel == p_profile->channel_number)
-    {
-        ANT_MESSAGE * p_message = (ANT_MESSAGE *)p_ant_event->msg.evt_buffer;
+	ant_fec_profile_t * p_profile = (ant_fec_profile_t *)p_context;
 
-        switch (p_ant_event->event)
+    if (p_ant_evt->channel == p_profile->channel_number)
+    {
+
+        switch (p_ant_evt->event)
         {
             case EVENT_RX:
 
-                if (p_message->ANT_MESSAGE_ucMesgID == MESG_BROADCAST_DATA_ID
-                    || p_message->ANT_MESSAGE_ucMesgID == MESG_ACKNOWLEDGED_DATA_ID
-                    || p_message->ANT_MESSAGE_ucMesgID == MESG_BURST_DATA_ID)
+                if (p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_BROADCAST_DATA_ID
+                    || p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_ACKNOWLEDGED_DATA_ID
+                    || p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_BURST_DATA_ID)
                 {
-                    disp_message_decode(p_profile, p_message->ANT_MESSAGE_aucPayload);
+                    disp_message_decode(p_profile, p_ant_evt->message.ANT_MESSAGE_aucPayload);
                 }
                 break;
 				
@@ -271,7 +273,7 @@ void ant_fec_disp_evt_handler(ant_fec_profile_t * p_profile, ant_evt_t * p_ant_e
             default:
                 break;
         }
-        service_calib(p_profile, p_ant_event->event);
+        service_calib(p_profile, p_ant_evt->event);
     }
 }
 

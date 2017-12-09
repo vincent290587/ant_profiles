@@ -15,7 +15,7 @@
 
 #include "ant_fec_page_16.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_16"
+#define NRF_LOG_MODULE_NAME ant_fec_p16
 #if ANT_FEC_PAGE_16_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_PAGE_16_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_PAGE_16_INFO_COLOR
@@ -23,6 +23,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_16_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 /**@brief bicycle power page 16 data layout structure. */
 typedef struct
