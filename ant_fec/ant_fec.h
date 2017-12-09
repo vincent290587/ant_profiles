@@ -117,6 +117,7 @@ typedef enum
     ANT_FEC_PAGE_81_UPDATED = ANT_FEC_PAGE_81, ///< Data page 81 has been updated (Display) or sent (Sensor).
     ANT_FEC_CALIB_TIMEOUT,                      ///< Request of calibration time-out occurred (Display).
     ANT_FEC_CALIB_REQUEST_TX_FAILED,            ///< Calibration request did not reach the destination (Display).
+    ANT_FEC_TX,                                 // TX time
 } ant_fec_evt_t;
 
 // Forward declaration of the ant_fec_profile_t type.
@@ -164,6 +165,12 @@ struct ant_fec_profile_s
 };
 
 
+/**@brief Bicycle power message data layout structure. */
+typedef struct
+{
+    uint8_t page_number;
+    uint8_t page_payload[7];
+} ant_fec_message_layout_t;
 
 /**@brief Function for initializing the ANT Bicycle Power Display profile instance.
  *

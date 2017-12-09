@@ -30,12 +30,6 @@
 #define FEC_CALIB_INT_TIMEOUT ((ANT_CLOCK_FREQUENCY * FEC_CALIBRATION_TIMOUT_S) / FEC_MSG_PERIOD) // calibration timeout in ant message period's unit
 
 
-/**@brief Bicycle power message data layout structure. */
-typedef struct
-{
-    uint8_t page_number;
-    uint8_t page_payload[7];
-} ant_fec_message_layout_t;
 
 
 typedef enum {
@@ -201,7 +195,7 @@ ret_code_t ant_fec_calib_request(ant_fec_profile_t * p_profile, ant_fec_page1_da
 
 
 
-/**@brief Function for hangling calibration events.
+/**@brief Function for handling calibration events.
  */
 static void service_calib(ant_fec_profile_t * p_profile, uint8_t event)
 {
@@ -263,6 +257,16 @@ void ant_fec_disp_evt_handler(ant_fec_profile_t * p_profile, ant_evt_t * p_ant_e
                     disp_message_decode(p_profile, p_message->ANT_MESSAGE_aucPayload);
                 }
                 break;
+				
+			case EVENT_TX:
+
+				if (p_profile->p_disp_cb->calib_stat == FEC_DISP_CALIB_NONE)
+				{
+					p_profile->evt_handler(p_profile, ANT_FEC_TX);
+				}
+
+
+			break;
 
             default:
                 break;
