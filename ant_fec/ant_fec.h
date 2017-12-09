@@ -52,7 +52,7 @@
                                      TRANSMISSION_TYPE,                 \
                                      DEVICE_NUMBER,                     \
                                      NETWORK_NUMBER)                    \
-static const ant_channel_config_t   NAME##_channel_fec_disp_config =   \
+static const ant_channel_config_t   CONCAT_2(NAME, _channel_fec_disp_config) =   \
     {                                                                   \
         .channel_number    = (CHANNEL_NUMBER),                          \
         .channel_type      = FEC_DISP_CHANNEL_TYPE,                    \
