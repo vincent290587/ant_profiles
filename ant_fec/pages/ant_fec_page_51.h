@@ -22,6 +22,9 @@
 
 #include <stdint.h>
 
+#define ANT_FEC_PAGE51_SLOPE_LSB       (1./100.)
+#define ANT_FEC_PAGE51_ROLL_RES_LSB    (1./100000.)
+
 #ifdef __cplusplus
 extern "C" {
 #endif

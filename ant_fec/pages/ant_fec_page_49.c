@@ -54,7 +54,7 @@ void ant_fec_page49_encode(uint8_t                           * p_page_buffer,
     ant_fec_page49_data_layout_t * p_outcoming_data = (ant_fec_page49_data_layout_t *)p_page_buffer;
 	
 	p_outcoming_data->target_power[0] = (uint8_t)(p_page_data->target_power & 0xFF);
-    p_outcoming_data->target_power[1] = (uint8_t)(p_page_data->target_power & 0xFF00);
+    p_outcoming_data->target_power[1] = (uint8_t)(p_page_data->target_power >> 8);
 }
 
 

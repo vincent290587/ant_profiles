@@ -27,6 +27,7 @@
 #include "ant_parameters.h"
 #include "ant_channel_config.h"
 #include "ant_fec_pages.h"
+#include "ant_fec_utils.h"
 #include "nrf_sdh_ant.h"
 #include "sdk_errors.h"
 

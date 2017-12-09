@@ -20,15 +20,17 @@
  * @ingroup ant_sdk_profiles_fec_pages
  */
 
+#define ANT_FEC_PAGE49_TARGET_POWER_LSB     (0.25)
+
 #include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/**@brief Common data structure for Bicycle Power data pages 17, 18.
+/**@brief Common data structure for Bicycle Power data pages 49
  *
- * @note This structure implements specific data that is common for pages 17, 18.
+ * @note This structure implements specific data that is common for pages 49
  */
 typedef struct
 {
