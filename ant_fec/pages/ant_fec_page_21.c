@@ -43,8 +43,8 @@ typedef struct
 
 void ant_fec_page21_log(ant_fec_page21_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("cadence:                %u\r\n", p_page_data->cadence);
-    NRF_LOG_INFO("inst_power:             %u\r\n", p_page_data->inst_power);
+    NRF_LOG_INFO("cadence:                %u", p_page_data->cadence);
+    NRF_LOG_INFO("inst_power:             %u", p_page_data->inst_power);
 }
 
 

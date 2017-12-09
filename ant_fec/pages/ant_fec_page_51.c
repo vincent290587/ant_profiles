@@ -43,8 +43,8 @@ typedef struct
 
 void ant_fec_page51_log(ant_fec_page51_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("grade_slope:                    %u\r\n", p_page_data->grade_slope);
-	NRF_LOG_INFO("roll_res:                    %u\r\n", p_page_data->roll_res);
+    NRF_LOG_INFO("grade_slope:                    %u", p_page_data->grade_slope);
+	NRF_LOG_INFO("roll_res:                       %u", p_page_data->roll_res);
 }
 
 

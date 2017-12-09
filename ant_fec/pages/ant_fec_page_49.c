@@ -43,7 +43,7 @@ typedef struct
 
 void ant_fec_page49_log(ant_fec_page49_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("target_power:                    %u\r\n", p_page_data->target_power);
+    NRF_LOG_INFO("target_power:                    %u", p_page_data->target_power);
 	
 }
 

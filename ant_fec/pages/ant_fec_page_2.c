@@ -40,11 +40,11 @@ typedef struct
 
 static void page2_data_log(ant_fec_page2_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("calibration_status:           %u\r\n", p_page_data->calibration_status);
-    NRF_LOG_INFO("calibration_conditions:            %u\r\n", p_page_data->calibration_conditions);
-	NRF_LOG_INFO("current_temperature:            %u\r\n", p_page_data->current_temperature);
-	NRF_LOG_INFO("target_speed:            %u\r\n", p_page_data->target_speed);
-	NRF_LOG_INFO("tgt_spin_down_time:            %u\r\n", p_page_data->tgt_spin_down_time);
+    NRF_LOG_INFO("calibration_status:                %u", p_page_data->calibration_status);
+    NRF_LOG_INFO("calibration_conditions:            %u", p_page_data->calibration_conditions);
+	NRF_LOG_INFO("current_temperature:               %u", p_page_data->current_temperature);
+	NRF_LOG_INFO("target_speed:                      %u", p_page_data->target_speed);
+	NRF_LOG_INFO("tgt_spin_down_time:                %u", p_page_data->tgt_spin_down_time);
 	
 }
 

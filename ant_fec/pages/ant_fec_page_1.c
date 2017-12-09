@@ -40,10 +40,10 @@ typedef struct
 
 static void page1_data_log(ant_fec_page1_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("calibration_req_rep:           %u\r\n", p_page_data->calibration_req_rep);
-    NRF_LOG_INFO("temperature:            %u\r\n", p_page_data->temperature);
-	NRF_LOG_INFO("zero_offset:            %u\r\n", p_page_data->zero_offset);
-	NRF_LOG_INFO("spin_down_time:            %u\r\n", p_page_data->spin_down_time);
+    NRF_LOG_INFO("calibration_req_rep:           %u", p_page_data->calibration_req_rep);
+    NRF_LOG_INFO("temperature:                   %u", p_page_data->temperature);
+	NRF_LOG_INFO("zero_offset:                   %u", p_page_data->zero_offset);
+	NRF_LOG_INFO("spin_down_time:                %u", p_page_data->spin_down_time);
 	
 }
 

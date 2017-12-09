@@ -29,11 +29,11 @@ NRF_LOG_MODULE_REGISTER();
 
 static void page17_data_log(ant_fec_page17_data_t const * p_page_data)
 {
-   	NRF_LOG_INFO("cycle_length:        %u\r\n", p_page_data->cycle_length);
-	NRF_LOG_INFO("incline_LSB:             %u\r\n", p_page_data->incline[0]);
-	NRF_LOG_INFO("incline_MSB:             %u\r\n", p_page_data->incline[1]);
-	NRF_LOG_INFO("resistance_level:            %u\r\n", p_page_data->resistance_level);
-	NRF_LOG_INFO("capabilities:             %u\r\n", p_page_data->capabilities);
+   	NRF_LOG_INFO("cycle_length:            %u", p_page_data->cycle_length);
+	NRF_LOG_INFO("incline_LSB:             %u", p_page_data->incline[0]);
+	NRF_LOG_INFO("incline_MSB:             %u", p_page_data->incline[1]);
+	NRF_LOG_INFO("resistance_level:        %u", p_page_data->resistance_level);
+	NRF_LOG_INFO("capabilities:            %u", p_page_data->capabilities);
 }
 
 
