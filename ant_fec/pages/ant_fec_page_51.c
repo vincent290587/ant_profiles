@@ -53,6 +53,10 @@ void ant_fec_page51_encode(uint8_t                           * p_page_buffer,
 {
     ant_fec_page51_data_layout_t * p_outcoming_data = (ant_fec_page51_data_layout_t *)p_page_buffer;
 	
+    p_outcoming_data->reserved_1 = 0xFF;
+    p_outcoming_data->reserved_2 = 0xFF;
+    p_outcoming_data->reserved_3 = 0xFF;
+    p_outcoming_data->reserved_4 = 0xFF;
 	p_outcoming_data->grade_slope[0] = (uint8_t)(p_page_data->grade_slope & 0xFF);
 	p_outcoming_data->grade_slope[1] = (uint8_t)((p_page_data->grade_slope & 0xFF00) >> 8);
 	p_outcoming_data->roll_res = p_page_data->roll_res;

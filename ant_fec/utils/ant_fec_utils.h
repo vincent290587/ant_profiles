@@ -20,11 +20,19 @@
 extern "C" {
 #endif
 
+//// For TX
+
 uint16_t ant_fec_utils_slope_to_uint16_t(float simulated_grade);
 
-uint8_t ant_fec_utils_rolling_res_to_uint8_t(float simulated_rolling_res);
+uint8_t  ant_fec_utils_rolling_res_to_uint8_t(float simulated_rolling_res);
 
 uint16_t ant_fec_utils_target_power_to_uint16_t(uint16_t simulated_power);
+
+//// For RX
+
+float    ant_fec_utils_raw_speed_to_uint16_t(uint16_t raw_speed);
+
+uint16_t ant_fec_utils_raw_time_to_uint16_t(uint16_t raw_time);
 
 #ifdef __cplusplus
 }

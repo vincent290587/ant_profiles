@@ -53,6 +53,11 @@ void ant_fec_page49_encode(uint8_t                           * p_page_buffer,
 {
     ant_fec_page49_data_layout_t * p_outcoming_data = (ant_fec_page49_data_layout_t *)p_page_buffer;
 	
+    p_outcoming_data->reserved_1 = 0xFF;
+    p_outcoming_data->reserved_2 = 0xFF;
+    p_outcoming_data->reserved_3 = 0xFF;
+    p_outcoming_data->reserved_4 = 0xFF;
+    p_outcoming_data->reserved_5 = 0xFF;
 	p_outcoming_data->target_power[0] = (uint8_t)(p_page_data->target_power & 0xFF);
     p_outcoming_data->target_power[1] = (uint8_t)(p_page_data->target_power >> 8);
 }

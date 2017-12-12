@@ -36,3 +36,26 @@ uint16_t ant_fec_utils_target_power_to_uint16_t(uint16_t simulated_power) {
 	return res;
 }
 
+/**
+ *
+ * @param raw_speed
+ * @return Speed in hector meters per hour
+ */
+uint16_t ant_fec_utils_raw_speed_to_uint16_t(uint16_t raw_speed) {
+
+	uint16_t res = raw_speed * 10 * ANT_FEC_PAGE16_SPEED_LSB;
+
+	return res;
+}
+
+/**
+ *
+ * @param raw_time
+ * @return Time in seconds
+ */
+uint16_t ant_fec_utils_raw_time_to_uint16_t(uint16_t raw_time) {
+
+	uint16_t res = raw_time * ANT_FEC_PAGE16_EL_TIME_LSB;
+
+	return res;
+}
