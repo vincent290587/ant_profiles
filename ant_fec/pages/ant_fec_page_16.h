@@ -22,8 +22,8 @@
 
 #include <stdint.h>
 
-#define ANT_FEC_PAGE16_SPEED_LSB          (36/10000)
-#define ANT_FEC_PAGE16_EL_TIME_LSB        (1/4)
+#define ANT_FEC_PAGE16_SPEED_LSB          (360.0/10000.0)
+#define ANT_FEC_PAGE16_EL_TIME_LSB        (1.0/4.0)
 
 #ifdef __cplusplus
 extern "C" {

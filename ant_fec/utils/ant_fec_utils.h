@@ -30,7 +30,7 @@ uint16_t ant_fec_utils_target_power_to_uint16_t(uint16_t simulated_power);
 
 //// For RX
 
-float    ant_fec_utils_raw_speed_to_uint16_t(uint16_t raw_speed);
+uint16_t ant_fec_utils_raw_speed_to_uint16_t(uint16_t raw_speed);
 
 uint16_t ant_fec_utils_raw_time_to_uint16_t(uint16_t raw_time);
 
