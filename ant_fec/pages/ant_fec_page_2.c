@@ -17,14 +17,7 @@
 #include "ant_fec_page_2.h"
 
 #define NRF_LOG_MODULE_NAME ant_fec_p2
-#if ANT_FEC_PAGE_2_LOG_ENABLED
-#define NRF_LOG_LEVEL       ANT_FEC_LOG_LEVEL
-#define NRF_LOG_INFO_COLOR  ANT_FEC_INFO_COLOR
-#else // ANT_FEC_PAGE_2_LOG_ENABLED
-#define NRF_LOG_LEVEL       0
-#endif // ANT_FEC_PAGE_2_LOG_ENABLED
 #include "nrf_log.h"
-#include "nrf_log_ctrl.h"
 NRF_LOG_MODULE_REGISTER();
 
 /**@brief bicycle power page 1 data layout structure. */
