@@ -16,15 +16,9 @@
 #include <string.h>
 #include "ant_fec_page_2.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_2"
-#if ANT_FEC_PAGE_2_LOG_ENABLED
-#define NRF_LOG_LEVEL       ANT_FEC_LOG_LEVEL
-#define NRF_LOG_INFO_COLOR  ANT_FEC_INFO_COLOR
-#else // ANT_FEC_PAGE_2_LOG_ENABLED
-#define NRF_LOG_LEVEL       0
-#endif // ANT_FEC_PAGE_2_LOG_ENABLED
+#define NRF_LOG_MODULE_NAME ant_fec_p2
 #include "nrf_log.h"
-#include "nrf_log_ctrl.h"
+NRF_LOG_MODULE_REGISTER();
 
 /**@brief bicycle power page 1 data layout structure. */
 typedef struct
@@ -39,11 +33,11 @@ typedef struct
 
 static void page2_data_log(ant_fec_page2_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("calibration_status:           %u\r\n", p_page_data->calibration_status);
-    NRF_LOG_INFO("calibration_conditions:            %u\r\n", p_page_data->calibration_conditions);
-	NRF_LOG_INFO("current_temperature:            %u\r\n", p_page_data->current_temperature);
-	NRF_LOG_INFO("target_speed:            %u\r\n", p_page_data->target_speed);
-	NRF_LOG_INFO("tgt_spin_down_time:            %u\r\n", p_page_data->tgt_spin_down_time);
+    NRF_LOG_INFO("calibration_status:                %u", p_page_data->calibration_status);
+    NRF_LOG_INFO("calibration_conditions:            %u", p_page_data->calibration_conditions);
+	NRF_LOG_INFO("current_temperature:               %u", p_page_data->current_temperature);
+	NRF_LOG_INFO("target_speed:                      %u", p_page_data->target_speed);
+	NRF_LOG_INFO("tgt_spin_down_time:                %u", p_page_data->tgt_spin_down_time);
 	
 }
 

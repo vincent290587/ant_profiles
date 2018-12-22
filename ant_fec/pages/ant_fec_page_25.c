@@ -17,7 +17,7 @@
 #include "ant_fec_page_25.h"
 #include "ant_fec_utils.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_25"
+#define NRF_LOG_MODULE_NAME ant_fec_p25
 #if ANT_FEC_PAGE_25_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_INFO_COLOR
@@ -25,6 +25,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_TORQUE_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 
 /**@brief bicycle power page torque data layout structure. */
@@ -42,12 +43,12 @@ typedef struct
 
 void ant_fec_page25_log(ant_fec_page25_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("event_count:           %u\r\n", p_page_data->event_count);
-	NRF_LOG_INFO("inst_cad:              %u\r\n", p_page_data->inst_cad);
-	NRF_LOG_INFO("acc_power:             %u\r\n", p_page_data->acc_power);
-    NRF_LOG_INFO("inst_power:            %u\r\n", p_page_data->inst_power);
-	NRF_LOG_INFO("status:                %u\r\n", p_page_data->status);
-    NRF_LOG_INFO("flags:                 %u\r\n", p_page_data->flags);
+    NRF_LOG_INFO("event_count:           %u", p_page_data->event_count);
+	NRF_LOG_INFO("inst_cad:              %u", p_page_data->inst_cad);
+	NRF_LOG_INFO("acc_power:             %u", p_page_data->acc_power);
+    NRF_LOG_INFO("inst_power:            %u", p_page_data->inst_power);
+	NRF_LOG_INFO("status:                %u", p_page_data->status);
+    NRF_LOG_INFO("flags:                 %u", p_page_data->flags);
 }
 
 

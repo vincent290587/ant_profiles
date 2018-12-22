@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+#define ANT_FEC_PAGE25_INST_POWER_LSB          (1.)
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -15,7 +15,7 @@
 
 #include "ant_fec_page_17.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_17"
+#define NRF_LOG_MODULE_NAME ant_fec_p17
 #if ANT_FEC_PAGE_17_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_PAGE_17_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_PAGE_17_INFO_COLOR
@@ -23,16 +23,17 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_17_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 
 
 static void page17_data_log(ant_fec_page17_data_t const * p_page_data)
 {
-   	NRF_LOG_INFO("cycle_length:        %u\r\n", p_page_data->cycle_length);
-	NRF_LOG_INFO("incline_LSB:             %u\r\n", p_page_data->incline[0]);
-	NRF_LOG_INFO("incline_MSB:             %u\r\n", p_page_data->incline[1]);
-	NRF_LOG_INFO("resistance_level:            %u\r\n", p_page_data->resistance_level);
-	NRF_LOG_INFO("capabilities:             %u\r\n", p_page_data->capabilities);
+   	NRF_LOG_INFO("cycle_length:            %u", p_page_data->cycle_length);
+	NRF_LOG_INFO("incline_LSB:             %u", p_page_data->incline[0]);
+	NRF_LOG_INFO("incline_MSB:             %u", p_page_data->incline[1]);
+	NRF_LOG_INFO("resistance_level:        %u", p_page_data->resistance_level);
+	NRF_LOG_INFO("capabilities:            %u", p_page_data->capabilities);
 }
 
 

@@ -17,7 +17,7 @@
 #include "ant_fec_page_49.h"
 #include "ant_fec_utils.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_49"
+#define NRF_LOG_MODULE_NAME ant_fec_p49
 #if ANT_FEC_PAGE_49_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_INFO_COLOR
@@ -25,6 +25,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_TORQUE_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 
 /**@brief bicycle power page torque data layout structure. */
@@ -42,7 +43,7 @@ typedef struct
 
 void ant_fec_page49_log(ant_fec_page49_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("target_power:                    %u\r\n", p_page_data->target_power);
+    NRF_LOG_INFO("target_power:                    %u", p_page_data->target_power);
 	
 }
 
@@ -52,8 +53,13 @@ void ant_fec_page49_encode(uint8_t                           * p_page_buffer,
 {
     ant_fec_page49_data_layout_t * p_outcoming_data = (ant_fec_page49_data_layout_t *)p_page_buffer;
 	
+    p_outcoming_data->reserved_1 = 0xFF;
+    p_outcoming_data->reserved_2 = 0xFF;
+    p_outcoming_data->reserved_3 = 0xFF;
+    p_outcoming_data->reserved_4 = 0xFF;
+    p_outcoming_data->reserved_5 = 0xFF;
 	p_outcoming_data->target_power[0] = (uint8_t)(p_page_data->target_power & 0xFF);
-    p_outcoming_data->target_power[1] = (uint8_t)(p_page_data->target_power & 0xFF00);
+    p_outcoming_data->target_power[1] = (uint8_t)(p_page_data->target_power >> 8);
 }
 
 

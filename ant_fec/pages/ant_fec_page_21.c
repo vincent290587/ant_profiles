@@ -17,7 +17,7 @@
 #include "ant_fec_page_21.h"
 #include "ant_fec_utils.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_21"
+#define NRF_LOG_MODULE_NAME ant_fec_p21
 #if ANT_FEC_PAGE_21_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_INFO_COLOR
@@ -25,6 +25,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_TORQUE_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 
 /**@brief bicycle power page torque data layout structure. */
@@ -42,8 +43,8 @@ typedef struct
 
 void ant_fec_page21_log(ant_fec_page21_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("cadence:                %u\r\n", p_page_data->cadence);
-    NRF_LOG_INFO("inst_power:             %u\r\n", p_page_data->inst_power);
+    NRF_LOG_INFO("cadence:                %u", p_page_data->cadence);
+    NRF_LOG_INFO("inst_power:             %u", p_page_data->inst_power);
 }
 
 

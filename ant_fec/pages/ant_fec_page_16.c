@@ -15,7 +15,7 @@
 
 #include "ant_fec_page_16.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_PAGE_16"
+#define NRF_LOG_MODULE_NAME ant_fec_p16
 #if ANT_FEC_PAGE_16_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_PAGE_16_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_PAGE_16_INFO_COLOR
@@ -23,6 +23,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_PAGE_16_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 /**@brief bicycle power page 16 data layout structure. */
 typedef struct
@@ -38,12 +39,12 @@ typedef struct
 
 static void page16_data_log(ant_fec_page16_data_t const * p_page_data)
 {
-	NRF_LOG_INFO("equipment_type:        %u\r\n", p_page_data->equipment_type);
-	NRF_LOG_INFO("elapsed_time:          %u\r\n", p_page_data->elapsed_time);
-	NRF_LOG_INFO("distance_traveled:     %u\r\n", p_page_data->distance_traveled);
-	NRF_LOG_INFO("speed:                 %u\r\n", p_page_data->speed);
-	NRF_LOG_INFO("heart_rate:            %u\r\n", p_page_data->heart_rate);
-	NRF_LOG_INFO("cap_state:             %u\r\n", p_page_data->cap_state);
+	NRF_LOG_INFO("equipment_type:        %u", p_page_data->equipment_type);
+	NRF_LOG_INFO("elapsed_time:          %u", p_page_data->elapsed_time);
+	NRF_LOG_INFO("distance_traveled:     %u", p_page_data->distance_traveled);
+	NRF_LOG_INFO("speed:                 %u", p_page_data->speed);
+	NRF_LOG_INFO("heart_rate:            %u", p_page_data->heart_rate);
+	NRF_LOG_INFO("cap_state:             %u", p_page_data->cap_state);
 }
 
 

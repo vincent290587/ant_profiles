@@ -25,9 +25,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "ant_parameters.h"
-#include "ant_stack_handler_types.h"
 #include "ant_channel_config.h"
 #include "ant_fec_pages.h"
+#include "ant_fec_utils.h"
+#include "nrf_sdh_ant.h"
 #include "sdk_errors.h"
 
 #define FEC_DEVICE_TYPE            0x11u               ///< Device type reserved for ANT+ Bicycle Power.
@@ -52,7 +53,7 @@
                                      TRANSMISSION_TYPE,                 \
                                      DEVICE_NUMBER,                     \
                                      NETWORK_NUMBER)                    \
-static const ant_channel_config_t   NAME##_channel_fec_disp_config =   \
+static const ant_channel_config_t   CONCAT_2(NAME, _channel_fec_disp_config) =   \
     {                                                                   \
         .channel_number    = (CHANNEL_NUMBER),                          \
         .channel_type      = FEC_DISP_CHANNEL_TYPE,                    \
@@ -64,23 +65,22 @@ static const ant_channel_config_t   NAME##_channel_fec_disp_config =   \
         .channel_period    = FEC_MSG_PERIOD,                           \
         .network_number    = (NETWORK_NUMBER),                          \
     }
-#define FEC_DISP_CHANNEL_CONFIG(NAME) &NAME##_channel_fec_disp_config
+#define FEC_DISP_CHANNEL_CONFIG(NAME) &CONCAT_2(NAME, _channel_fec_disp_config)
 
 /**@brief Initialize an ANT profile configuration structure for the FEC profile (Display).
  *
  * @param[in]  NAME                 Name of related instance.
  * @param[in]  EVT_HANDLER          Event handler to be called for handling events in the FEC profile.
  */
-#define FEC_DISP_PROFILE_CONFIG_DEF(NAME,                              \
-                                     EVT_HANDLER)                       \
-static ant_fec_disp_cb_t            NAME##_fec_disp_cb;               \
-static const ant_fec_disp_config_t  NAME##_profile_fec_disp_config =  \
+#define FEC_DISP_PROFILE_CONFIG_DEF(NAME,                               \
+                                    EVT_HANDLER)                        \
+static ant_fec_disp_cb_t            CONCAT_2(NAME, _fec_disp_cb);       \
+static const ant_fec_disp_config_t  CONCAT_2(NAME, _profile_fec_disp_config) =    \
     {                                                                   \
-        .p_cb               = &NAME##_fec_disp_cb,                     \
+        .p_cb               = &CONCAT_2(NAME, _fec_disp_cb),            \
         .evt_handler        = (EVT_HANDLER),                            \
     }
-#define FEC_DISP_PROFILE_CONFIG(NAME) &NAME##_profile_fec_disp_config
-
+#define FEC_DISP_PROFILE_CONFIG(NAME) &CONCAT_2(NAME, _profile_fec_disp_config)
 
 
 /**@brief Bicycle Power page number type. */
@@ -214,7 +214,7 @@ void ant_fec_calib_response(ant_fec_profile_t * p_profile);
  * @param[in]   p_profile       Pointer to the profile instance.
  * @param[in]   p_ant_event     Event received from the ANT stack.
  */
-void ant_fec_disp_evt_handler(ant_fec_profile_t * p_profile, ant_evt_t * p_ant_event);
+void ant_fec_disp_evt_handler(ant_evt_t * p_ant_evt, void * p_context);
 
 /** @name Functions: Display calibration API
  * @{

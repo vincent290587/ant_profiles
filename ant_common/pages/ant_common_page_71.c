@@ -16,7 +16,7 @@
 #include <string.h>
 #include "ant_common_page_71.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_COMMON_PAGE_71"
+#define NRF_LOG_MODULE_NAME ant_common_page_71
 #if ANT_COMMON_PAGE_71_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_COMMON_PAGE_71_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_COMMON_PAGE_71_INFO_COLOR
@@ -24,6 +24,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_COMMON_PAGE_71_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 
 /**@brief Function for tracing page 71 data.
@@ -32,13 +33,13 @@
  */
 static void page71_data_log(volatile ant_common_page71_data_t const * p_page_data)
 {
-    NRF_LOG_INFO("last_cmd_id:               %u\r\n", p_page_data->last_cmd_id);
-    NRF_LOG_INFO("sequence:                  %u\r\n", p_page_data->sequence);
-    NRF_LOG_INFO("cmd_status:                %u\r\n\n", p_page_data->cmd_status);
-    NRF_LOG_INFO("data1:                     %u\r\n\n", p_page_data->data[0]);
-    NRF_LOG_INFO("data2:                     %u\r\n\n", p_page_data->data[1]);
-    NRF_LOG_INFO("data3:                     %u\r\n\n", p_page_data->data[2]);
-    NRF_LOG_INFO("data4:                     %u\r\n\n", p_page_data->data[3]);
+    NRF_LOG_INFO("last_cmd_id:               %u", p_page_data->last_cmd_id);
+    NRF_LOG_INFO("sequence:                  %u", p_page_data->sequence);
+    NRF_LOG_INFO("cmd_status:                %u", p_page_data->cmd_status);
+    NRF_LOG_INFO("data1:                     %u", p_page_data->data[0]);
+    NRF_LOG_INFO("data2:                     %u", p_page_data->data[1]);
+    NRF_LOG_INFO("data3:                     %u", p_page_data->data[2]);
+    NRF_LOG_INFO("data4:                     %u", p_page_data->data[3]);
 }
 
 
