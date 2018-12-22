@@ -16,7 +16,7 @@
 #include "ant_fec_common_data.h"
 #include "ant_fec_utils.h"
 
-#define NRF_LOG_MODULE_NAME "ANT_FEC_COMMON"
+#define NRF_LOG_MODULE_NAME ant_fec_common_data
 #if ANT_FEC_COMMON_LOG_ENABLED
 #define NRF_LOG_LEVEL       ANT_FEC_COMMON_LOG_LEVEL
 #define NRF_LOG_INFO_COLOR  ANT_FEC_COMMON_INFO_COLOR
@@ -24,6 +24,7 @@
 #define NRF_LOG_LEVEL       0
 #endif // ANT_FEC_COMMON_LOG_ENABLED
 #include "nrf_log.h"
+NRF_LOG_MODULE_REGISTER();
 
 /**@brief FEC common page data layout structure. */
 typedef struct
