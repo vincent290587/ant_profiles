@@ -55,8 +55,14 @@ void ant_fec_page25_log(ant_fec_page25_data_t const * p_page_data)
 void ant_fec_page25_encode(uint8_t                           * p_page_buffer,
                                  ant_fec_page25_data_t const * p_page_data)
 {
-    //ant_fec_page25_data_layout_t * p_outcoming_data = (ant_fec_page25_data_layout_t *)p_page_buffer;
+    ant_fec_page25_data_layout_t * p_outcoming_data = (ant_fec_page25_data_layout_t *)p_page_buffer;
 
+    p_outcoming_data->event_count = p_page_data->event_count;
+    p_outcoming_data->inst_cad = p_page_data->inst_cad;
+    p_outcoming_data->inst_power_lsb = p_page_data->inst_power & 0xFF;
+    p_outcoming_data->inst_power_msb_status = (p_page_data->inst_power >> 8) & 0b00001111;
+    p_outcoming_data->acc_power[0] = p_page_data->acc_power & 0xFF;
+    p_outcoming_data->acc_power[1] = p_page_data->acc_power & 0xFF >> 8;
 }
 
 
