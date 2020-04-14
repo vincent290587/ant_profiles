@@ -36,6 +36,7 @@
 
 #define FEC_EXT_ASSIGN             0x00                ///< ANT ext assign (see Ext. Assign Channel Parameters in ant_parameters.h: @ref ant_parameters).
 #define FEC_DISP_CHANNEL_TYPE      CHANNEL_TYPE_SLAVE  ///< Display Bicycle Power channel type.
+#define FEC_SENS_CHANNEL_TYPE      CHANNEL_TYPE_MASTER
 
 #define FEC_CALIBRATION_TIMOUT_S   150u                  ///< Time-out for responding to calibration callback (s).
 
@@ -80,6 +81,48 @@ static const ant_fec_disp_config_t  NAME##_profile_fec_disp_config =  \
         .evt_handler        = (EVT_HANDLER),                            \
     }
 #define FEC_DISP_PROFILE_CONFIG(NAME) &NAME##_profile_fec_disp_config
+
+/**@brief Initialize an ANT channel configuration structure for the Bicycle Power profile (Display).
+ *
+ * @param[in]  NAME                 Name of related instance.
+ * @param[in]  CHANNEL_NUMBER       Number of the channel assigned to the profile instance.
+ * @param[in]  TRANSMISSION_TYPE    Type of transmission assigned to the profile instance.
+ * @param[in]  DEVICE_NUMBER        Number of the device assigned to the profile instance.
+ * @param[in]  NETWORK_NUMBER       Number of the network assigned to the profile instance.
+ */
+#define FEC_SENS_CHANNEL_CONFIG_DEF(NAME,                              \
+                                     CHANNEL_NUMBER,                    \
+                                     TRANSMISSION_TYPE,                 \
+                                     DEVICE_NUMBER,                     \
+                                     NETWORK_NUMBER)                    \
+static const ant_channel_config_t   NAME##_channel_fec_sens_config =   \
+    {                                                                   \
+        .channel_number    = (CHANNEL_NUMBER),                          \
+        .channel_type      = FEC_SENS_CHANNEL_TYPE,                    \
+        .ext_assign        = FEC_EXT_ASSIGN,                           \
+        .rf_freq           = FEC_ANTPLUS_RF_FREQ,                      \
+        .transmission_type = (TRANSMISSION_TYPE),                       \
+        .device_type       = FEC_DEVICE_TYPE,                          \
+        .device_number     = (DEVICE_NUMBER),                           \
+        .channel_period    = FEC_MSG_PERIOD,                           \
+        .network_number    = (NETWORK_NUMBER),                          \
+    }
+#define FEC_SENS_CHANNEL_CONFIG(NAME) &NAME##_channel_fec_sens_config
+
+/**@brief Initialize an ANT profile configuration structure for the FEC profile (Display).
+ *
+ * @param[in]  NAME                 Name of related instance.
+ * @param[in]  EVT_HANDLER          Event handler to be called for handling events in the FEC profile.
+ */
+#define FEC_SENS_PROFILE_CONFIG_DEF(NAME,                              \
+                                     EVT_HANDLER)                       \
+static ant_fec_cb_t            NAME##_fec_sens_cb;               \
+static const ant_fec_config_t  NAME##_profile_fec_sens_config =  \
+    {                                                                   \
+        .p_cb               = &NAME##_fec_sens_cb,                     \
+        .evt_handler        = (EVT_HANDLER),                            \
+    }
+#define FEC_SENS_PROFILE_CONFIG(NAME) &NAME##_profile_fec_sens_config
 
 
 
@@ -140,15 +183,15 @@ extern "C" {
 /**@brief Bicycle Power Display configuration structure. */
 typedef struct
 {
-    ant_fec_disp_cb_t   * p_cb;            ///< Pointer to the data buffer for internal use.
+    ant_fec_cb_t          * p_cb;            ///< Pointer to the data buffer for internal use.
     ant_fec_evt_handler_t evt_handler;     ///< Event handler to be called for handling events in the FEC profile.
-} ant_fec_disp_config_t;
+} ant_fec_config_t;
 
 /**@brief FEC profile structure. */
 struct ant_fec_profile_s
 {
     uint8_t                  channel_number; ///< Channel number assigned to the profile.
-    ant_fec_disp_cb_t        * p_disp_cb;                              ///< Pointer to internal control block.
+    ant_fec_cb_t            *p_cb;          ///< Pointer to internal control block.
     ant_fec_evt_handler_t    evt_handler;    ///< Event handler to be called for handling events in the FEC profile.
 	ant_fec_page1_data_t     page_1;
 	ant_fec_page2_data_t     page_2;
@@ -182,7 +225,7 @@ typedef struct
  */
 ret_code_t ant_fec_disp_init(ant_fec_profile_t           * p_profile,
                               ant_channel_config_t const   * p_channel_config,
-                              ant_fec_disp_config_t const * p_disp_config);
+                              ant_fec_config_t const * p_disp_config);
 
 /**@brief Function for opening the profile instance channel for ANT FEC Display.
  *

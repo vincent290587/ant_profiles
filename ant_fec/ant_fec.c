@@ -70,7 +70,7 @@ static ret_code_t ant_fec_init(ant_fec_profile_t         * p_profile,
 
 ret_code_t ant_fec_disp_init(ant_fec_profile_t           * p_profile,
                               ant_channel_config_t const   * p_channel_config,
-                              ant_fec_disp_config_t const * p_disp_config)
+                              ant_fec_config_t const * p_disp_config)
 {
     ASSERT(p_profile != NULL);
     ASSERT(p_channel_config != NULL);
@@ -78,11 +78,11 @@ ret_code_t ant_fec_disp_init(ant_fec_profile_t           * p_profile,
     ASSERT(p_disp_config->evt_handler != NULL);
     ASSERT(p_disp_config->p_cb != NULL);
 
-    p_profile->evt_handler   = p_disp_config->evt_handler;
-    p_profile->p_disp_cb = p_disp_config->p_cb;
+    p_profile->evt_handler = p_disp_config->evt_handler;
+    p_profile->p_cb = p_disp_config->p_cb;
 
-    p_profile->p_disp_cb ->calib_timeout = 0;
-    p_profile->p_disp_cb ->calib_stat    = FEC_DISP_CALIB_NONE;
+    p_profile->p_cb ->calib_timeout = 0;
+    p_profile->p_cb ->calib_stat    = FEC_DISP_CALIB_NONE;
 
     return ant_fec_init(p_profile, p_channel_config);
 }
@@ -169,7 +169,7 @@ ret_code_t ant_fec_calib_request(ant_fec_profile_t * p_profile, ant_fec_page1_da
 {
     ant_fec_message_layout_t fec_message_payload;
 
-    if (p_profile->p_disp_cb->calib_stat == FEC_DISP_CALIB_REQUESTED)
+    if (p_profile->p_cb->calib_stat == FEC_DISP_CALIB_REQUESTED)
     {
         return NRF_SUCCESS; // calibration in progress, so omit this request
     }
@@ -185,8 +185,8 @@ ret_code_t ant_fec_calib_request(ant_fec_profile_t * p_profile, ant_fec_page1_da
 
     if (err_code == NRF_SUCCESS)
     {
-        p_profile->p_disp_cb->calib_timeout = FEC_CALIB_INT_TIMEOUT; // initialize on calibration's time-out
-        p_profile->p_disp_cb->calib_stat    = FEC_DISP_CALIB_REQUESTED;
+        p_profile->p_cb->calib_timeout = FEC_CALIB_INT_TIMEOUT; // initialize on calibration's time-out
+        p_profile->p_cb->calib_stat    = FEC_DISP_CALIB_REQUESTED;
         NRF_LOG_INFO("Start calibration process\r\n");
 		m_fec_state = FEC_STATE_CAL;
     }
@@ -201,7 +201,7 @@ static void service_calib(ant_fec_profile_t * p_profile, uint8_t event)
 {
     ant_fec_evt_t       fec_event;
 
-    if (p_profile->p_disp_cb->calib_stat == FEC_DISP_CALIB_REQUESTED)
+    if (p_profile->p_cb->calib_stat == FEC_DISP_CALIB_REQUESTED)
     {
         switch (event)
         {
@@ -209,7 +209,7 @@ static void service_calib(ant_fec_profile_t * p_profile, uint8_t event)
             /* fall through */
             case EVENT_RX_FAIL:
 
-                if (p_profile->p_disp_cb->calib_timeout-- == 0)
+                if (p_profile->p_cb->calib_timeout-- == 0)
                 {
                     fec_event = ANT_FEC_CALIB_TIMEOUT;
                     break;
@@ -232,7 +232,7 @@ static void service_calib(ant_fec_profile_t * p_profile, uint8_t event)
         }
 
         NRF_LOG_INFO("End calibration process\r\n");
-        p_profile->p_disp_cb->calib_stat = FEC_DISP_CALIB_NONE;
+        p_profile->p_cb->calib_stat = FEC_DISP_CALIB_NONE;
 
         p_profile->evt_handler(p_profile, fec_event);
     }
@@ -260,7 +260,7 @@ void ant_fec_disp_evt_handler(ant_fec_profile_t * p_profile, ant_evt_t * p_ant_e
 				
 			case EVENT_TX:
 
-				if (p_profile->p_disp_cb->calib_stat == FEC_DISP_CALIB_NONE)
+				if (p_profile->p_cb->calib_stat == FEC_DISP_CALIB_NONE)
 				{
 					p_profile->evt_handler(p_profile, ANT_FEC_TX);
 				}

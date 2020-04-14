@@ -47,7 +47,7 @@ typedef struct
         FEC_DISP_CALIB_NONE,      ///< Idle state.
         FEC_DISP_CALIB_REQUESTED, ///< Calibration requested.
     } calib_stat;
-} ant_fec_disp_cb_t;
+} ant_fec_cb_t;
 
 /**
  * @}
